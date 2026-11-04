@@ -51,7 +51,7 @@ render=function(){
  if(!grid.querySelector('.tile')&&pinGrid.children.length)grid.replaceChildren();
  document.body.classList.toggle('selecting',selectionMode);$('bulkBar').classList.toggle('hidden',!selectionMode);refreshSelection();
  const allTags=[...new Set(items.flatMap(tagList))].sort((a,b)=>a.localeCompare(b));tagsBar.replaceChildren();
- if(allTags.length){const label=el('label',{htmlFor:'tagFilter'},prefs.language==='en'?'Tags':'Tagi');const select=el('select',{id:'tagFilter'});select.add(new Option(prefs.language==='en'?'All tags':'Wszystkie tagi',''));for(const tag of allTags)select.add(new Option(tag,tag));select.value=activeTag;select.onchange=()=>{activeTag=select.value;render();$('tagFilter')?.focus()};tagsBar.append(label,select)}
+ if(allTags.length){const label=el('label',{htmlFor:'tagFilter'},prefs.language==='en'?'Tags':'Tagi');const select=el('select',{id:'tagFilter'});select.add(new Option(prefs.language==='en'?'All tags':'Wszystkie',''));for(const tag of allTags)select.add(new Option(tag,tag));select.value=activeTag;select.onchange=()=>{activeTag=select.value;render();$('tagFilter')?.focus()};tagsBar.append(label,select)}
  $('openTrash').textContent='Kosz ('+prefs.trash.length+')';
 };
 function refreshSelection(){ $('selectedCount').textContent='Zaznaczono: '+selected.size;for(const id of ['bulkMove','bulkExport','bulkDelete'])$(id).disabled=!selected.size;document.querySelectorAll('.tile[data-uid]').forEach(t=>t.classList.toggle('selected',selected.has(t.dataset.uid))) }
