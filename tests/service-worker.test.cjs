@@ -8,7 +8,7 @@ const assert=require('node:assert/strict');
  vm.runInNewContext(readFileSync(require('node:path').join(__dirname,'../sw.js'),'utf8'),scope);
  let pending;events.install({waitUntil:p=>pending=p});await pending;
  assert(entries.has('https://jargielo.github.io/GoToLinks/index.html'));assert(entries.has('https://jargielo.github.io/GoToLinks/enhancements.js'));
- events.activate({waitUntil:p=>pending=p});await pending;assert.deepEqual(deleted,['gotolinks-old']);assert(claimed);
+ events.activate({waitUntil:p=>pending=p});await pending;assert.deepEqual(deleted,['gotolinks-old','gotolinks-v2-20261104-icons']);assert(claimed);
  let response;events.fetch({request:{method:'GET',url:'https://jargielo.github.io/GoToLinks/?url=https%3A%2F%2Fexample.com',mode:'navigate'},respondWith:p=>response=p});assert.equal((await response).cached,true);
  response=null;events.fetch({request:{method:'POST',url:'https://jargielo.github.io/GoToLinks/',mode:'navigate'},respondWith:p=>response=p});assert.equal(response,null);
  events.fetch({request:{method:'GET',url:'https://www.gstatic.com/firebase.js',mode:'cors'},respondWith:p=>response=p});assert.equal(response,null);

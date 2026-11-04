@@ -1,5 +1,5 @@
-const CACHE='gotolinks-v2-20261104-icons';
-const CORE=['./','./index.html','./enhancements.js','./enhancements.css','./manifest.webmanifest','./firebase-config.js','./icon-large-192.png','./icon-large-512.png','./icon-maskable-512.png'];
+const CACHE='gotolinks-v2-20261104-chain';
+const CORE=['./','./index.html','./enhancements.js','./enhancements.css','./manifest.webmanifest','./firebase-config.js','./icon-chain-192.png','./icon-chain-512.png','./icon-chain-maskable-512.png'];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('gotolinks-')&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',event=>{
