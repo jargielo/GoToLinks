@@ -84,8 +84,8 @@ $('bulkMove').onclick=()=>openMove([...selected]);$('bulkDelete').onclick=()=>mo
 function downloadBytes(bytes,type,name){const blob=new Blob([bytes],{type}),url=URL.createObjectURL(blob),a=el('a',{href:url,download:name});document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000)}
 function selectedTree(){const result=copy(collectBranch([...selected])),folders=new Set(result.filter(x=>x.type==='folder').map(x=>x.id));for(const x of result)if(!folders.has(x.parentId))x.parentId=null;return result}
 $('bulkExport').onclick=()=>downloadBytes(bookmarkHTML(selectedTree()),'text/html;charset=utf-8','go-to-links-wybrane.html');
-function buildImportPlan(source,merge){
- const output=merge?copy(items):[],folderMap=new Map(),pending=source.filter(x=>x.type==='folder').map(copy);let folders=0,links=0,duplicates=0;
+function buildImportPlan(source,merge,existingItems=items){
+ const output=merge?copy(existingItems):[],folderMap=new Map(),pending=source.filter(x=>x.type==='folder').map(copy);let folders=0,links=0,duplicates=0;
  while(pending.length){let progressed=false;for(let i=pending.length-1;i>=0;i--){const f=pending[i];if(f.parentId&&!folderMap.has(f.parentId))continue;const parentId=f.parentId?folderMap.get(f.parentId):null;const existing=output.find(x=>x.type==='folder'&&(x.parentId||null)===parentId&&normalizeSearch(x.name)===normalizeSearch(f.name));if(existing){folderMap.set(f.id,existing.id)}else{const id='folder-'+uid();folderMap.set(f.id,id);output.push({...f,id,parentId,uid:uid()});folders++}pending.splice(i,1);progressed=true}if(!progressed)throw Error('Nieprawidłowe foldery')}
  const known=new Map(output.filter(x=>x.type!=='folder').map(x=>[canonicalURL(x.url),x]));
  for(const raw of source.filter(x=>x.type!=='folder')){const x=copy(raw),url=canonicalURL(x.url);if(known.has(url)&&merge){duplicates++;continue}x.uid=uid();x.parentId=x.parentId?folderMap.get(x.parentId):null;output.push(x);known.set(url,x);links++}
