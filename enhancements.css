@@ -15,3 +15,19 @@ dialog h2{font-size:19px;overflow-wrap:anywhere}dialog p{font-size:13px;line-hei
 /* Per-bookmark layout, shared by normal and pinned tiles. */
 .grid .tile[data-icon-layout=center] a .ico>img{width:60%;height:60%;object-fit:contain}
 .icon-layout{margin:4px 0;padding:8px 12px;border:1px solid var(--line);border-radius:12px}.icon-layout legend{padding:0 4px;font-size:12px;color:var(--muted)}.icon-layout label{display:flex;align-items:center;gap:9px;margin:10px 0;font-size:13px;cursor:pointer}.icon-layout input[type=radio]{display:inline-block;flex:0 0 18px;width:18px;height:18px;padding:0;margin:0;accent-color:var(--text)}
+
+/* Scale bookmark content with reflow, keeping navigation and dialogs at a usable size. */
+.grid[data-scaled]{gap:calc(12px * var(--tile-scale)) calc(6px * var(--tile-scale))}
+.grid[data-scaled] .tile a,.grid[data-scaled] .folder-link{gap:calc(7px * var(--tile-scale))}
+.grid[data-scaled] .ico{width:min(100%,calc(59px * var(--tile-scale)));border-radius:calc(17px * var(--tile-scale))}
+.grid[data-scaled].compact .ico{width:calc(40px * var(--tile-scale));max-width:100%;border-radius:calc(12px * var(--tile-scale))}
+.grid[data-scaled].list .ico{width:calc(32px * var(--tile-scale));flex:0 0 calc(32px * var(--tile-scale));border-radius:calc(9px * var(--tile-scale))}
+.grid[data-scaled].gallery .ico{width:calc(52px * var(--tile-scale));max-width:100%}
+.grid[data-scaled] .name{font-size:calc(10px * var(--tile-scale))}
+.grid[data-scaled].list .name{font-size:calc(12px * var(--tile-scale))}
+.grid[data-scaled] .folder-icon{width:calc(30px * var(--tile-scale));height:calc(30px * var(--tile-scale))}
+.grid[data-scaled].compact .folder-icon{width:calc(22px * var(--tile-scale));height:calc(22px * var(--tile-scale))}
+.grid[data-scaled].list .folder-icon{width:calc(21px * var(--tile-scale));height:calc(21px * var(--tile-scale))}
+.grid[data-scaled].gallery .tile a,.grid[data-scaled].gallery .folder-link{padding:calc(12px * var(--tile-scale)) calc(4px * var(--tile-scale))}
+.grid[data-scaled].list .tile a,.grid[data-scaled].list .folder-link{padding:calc(8px * var(--tile-scale)) calc(12px * var(--tile-scale));gap:calc(13px * var(--tile-scale))}
+.scale-controls{display:flex;align-items:center;justify-content:center;gap:24px;margin:18px 0}.scale-controls button{min-width:44px;min-height:44px;padding:8px;font-size:22px}.scale-controls output{min-width:74px;text-align:center;font-size:24px;font-variant-numeric:tabular-nums}dialog input.scale-range{width:100%;height:28px;margin:10px 0;padding:0;accent-color:var(--text)}.scale-limits{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}
