@@ -18,6 +18,7 @@
 - `node --check enhancements.js`
 - `node --check sw.js`
 - `node tests/service-worker.test.cjs`
+- `node tests/zip.test.cjs`: struktura ZIP, UTF-8, katalog centralny i poprawne daty plików.
 - `tests/browser-tests.html`: plan łączenia importu, duplikaty, struktura folderów, CRC32, bezpieczny HTML i działający widok offline.
 - Kontrola ZIP w Python zipfile: CRC, Unicode i pliki binarne.
 - Testy UI w przeglądarce: zapis tagów/notatek, menu prawego przycisku, przypinanie, kosz i Cofnij, ostrzeżenie o duplikacie, import i przenoszenie, przywracanie folderu z zawartością, wyszukiwanie notatki, skróty i odbiór parametrów udostępnienia.
